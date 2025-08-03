@@ -1,0 +1,9 @@
+/* src/styles/tailwind.css */
+@import "tailwindcss";
+
+html,
+body,
+#root {
+  height: 100%;
+  padding: 20px;
+}
