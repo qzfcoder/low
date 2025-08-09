@@ -13,6 +13,8 @@ async function bootstrap() {
   // 使用全局拦截器
   app.useGlobalInterceptors(new ResponseIntercept());
   app.useGlobalPipes(new ValidationPipe());
+
+  app.setGlobalPrefix('api');
   // 监听指定的端口，如果没有指定，则监听3000端口
   await app.listen(process.env.PORT ?? 3000);
 }
