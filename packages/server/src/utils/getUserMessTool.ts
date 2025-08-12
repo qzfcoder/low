@@ -11,7 +11,7 @@ const GetUserIP = createParamDecorator(
   (data: string, ctx: ExecutionContext) => {
     // 获取当前Http请求对象
     const request = ctx.switchToHttp().getRequest();
-    console.log('request', request);
+    // console.log('request', request);
     // 获取到用户的ip地址，使用正则匹配出ip地址ipv4转成字符串形式
     return request.ip.match(/\d+\.\d+\.\d+\.\d+/)?.join('.');
   },

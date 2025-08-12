@@ -1,3 +1,4 @@
+import { JwtModuleOptions } from '@nestjs/jwt';
 import type { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { RedisOptions } from 'ioredis';
 
@@ -18,4 +19,10 @@ export const redisConfig: RedisOptions = {
   port: 6379,
   password: 'qzf123456',
   // db: 0,
+};
+
+export const jwtConfig: JwtModuleOptions = {
+  secret: 'lowcode',
+  global: true,
+  signOptions: { expiresIn: '1d' }, // 过期时间
 };

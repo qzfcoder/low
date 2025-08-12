@@ -22,6 +22,7 @@ export class TextMessageTool {
     // return result.json();
     return {
       code: phone,
+      data: randomCode,
       msg: '发送成功',
     };
   }

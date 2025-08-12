@@ -7,6 +7,7 @@ import { User } from './entities/user.entity';
 import { SecretTool } from 'src/utils/secretTool';
 import { CaptchaTool } from 'src/utils/captchaTool';
 import { TextMessageTool } from 'src/utils/textMessageTool';
+import { MathRandomTool } from 'src/utils/mathRandomTool';
 /**
  * 用户模块装饰器
  * 使用 @Module 装饰器来定义用户模块的元数据
@@ -20,6 +21,12 @@ import { TextMessageTool } from 'src/utils/textMessageTool';
   controllers: [UserController],
   // 提供服务和其他提供者
   // 注册用户服务、密钥工具和验证码工具等提供者
-  providers: [UserService, SecretTool, CaptchaTool, TextMessageTool],
+  providers: [
+    UserService,
+    SecretTool,
+    CaptchaTool,
+    TextMessageTool,
+    MathRandomTool,
+  ],
 })
 export class UserModule {}
