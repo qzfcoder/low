@@ -1,1 +1,1 @@
-export const test = "测试数据";
+export * from "./types";
