@@ -1,4 +1,3 @@
-import { test } from "@lowcode/share";
 import { Button } from "antd";
 function App() {
   // const xd = <div>123</div>
@@ -6,7 +5,6 @@ function App() {
   return (
     <>
       <Button type="primary">Primary Button</Button>
-      <div className="text-red-500 bg-blue-100 p-4 font-bold"> {test}</div>
     </>
   );
 }

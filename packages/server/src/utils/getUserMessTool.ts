@@ -2,9 +2,13 @@
  * 这是一个自定义参数装饰器
  */
 
+import { IUser } from '@lowcode/share';
 import type { ExecutionContext } from '@nestjs/common'; // 执行上下文的类型
 
 import { createParamDecorator } from '@nestjs/common'; // 用于创建自定义参数装饰器
+
+// 用户数据类型删除 password
+export type TCurrentUser = Omit<IUser, 'password'>;
 
 // 获取用户IP的参数+
 const GetUserIP = createParamDecorator(
@@ -25,5 +29,12 @@ const GetUserDevice = createParamDecorator(
     return request.headers['user-agent'];
   },
 );
+// 获取用户所有信息参数装饰器
+const getUserMess = createParamDecorator((data, ctx: ExecutionContext) => {
+  // 获取当前 HTTP 的请求对象
+  const request = ctx.switchToHttp().getRequest();
 
-export { GetUserIP, GetUserDevice };
+  // 获取用户的所以信息
+  return request.user;
+});
+export { GetUserIP, GetUserDevice, getUserMess };

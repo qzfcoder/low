@@ -18,7 +18,7 @@ export class AbnormalFilter implements ExceptionFilter {
     response.header('Content-Type', 'application/json; charset=utf-8');
 
     let status: number;
-    let message: string | string[];
+    let message: string;
 
     if (exception instanceof HttpException) {
       // 处理 HTTP 异常
@@ -32,7 +32,9 @@ export class AbnormalFilter implements ExceptionFilter {
         typeof exceptionResponse === 'object' &&
         'message' in exceptionResponse
       ) {
-        message = (exceptionResponse as any).message;
+        // 如果message是数组，取第一个元素；如果是字符串，直接使用
+        const rawMessage = (exceptionResponse as any).message;
+        message = Array.isArray(rawMessage) ? rawMessage[0] : rawMessage;
       } else {
         message = exception.message;
       }
@@ -48,7 +50,7 @@ export class AbnormalFilter implements ExceptionFilter {
     // 设置响应体
     response.status(status).json({
       code: status,
-      message: Array.isArray(message) ? message : [message], // 统一返回数组格式
+      message: message, // 直接返回字符串格式的错误信息
       url: request.originalUrl,
       method: request.method,
       timestamp: new Date().toISOString(),

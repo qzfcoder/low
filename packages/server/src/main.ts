@@ -8,6 +8,13 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   // 创建一个Nest应用程序实例
   const app = await NestFactory.create(AppModule);
+
+  // 配置跨域
+  app.enableCors({
+    origin: true,
+    credentials: true, // 允许携带cookie
+  });
+
   // 使用全局过滤器
   app.useGlobalFilters(new AbnormalFilter());
   // 使用全局拦截器

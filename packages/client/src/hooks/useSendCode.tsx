@@ -1,6 +1,8 @@
+import { useRequest } from "ahooks";
 import type { FormInstance } from "antd"; // 导入Ant Design的表单实例类型
 import { Button, Form, Input } from "antd"; // 导入Ant Design的表单、按钮和输入框组件
 import { useEffect, useState } from "react"; // 导入React的副作用钩子和状态钩子
+import { getCaptcha, sendCode } from "../api/user";
 
 /**
  * 使用useSendCode函数
@@ -21,6 +23,27 @@ export function useSendCode(form: FormInstance, type: string) {
 
   // 设置是否已经开始倒计时和设置是否已经开始倒计时的方法
   const [startedCountDown, setStartedCountDown] = useState(false);
+  // 图形验证码请求
+  const { run: refreshCaptcha, loading: loadingWithGetCaptcha } = useRequest(
+    () => getCaptcha({ type }),
+    {
+      // manual: true, // 手动触发, 初始不触发
+      onSuccess: (res) => {
+        console.log(res);
+        setCaptchaSrc(res.data.data);
+      },
+    }
+  );
+  // 手机验证码请求
+  const { run: execSendCode, loading: loadingWithSendCode } = useRequest(
+    (values) => sendCode(values),
+    {
+      // manual: true, // 手动触发, 初始不触发
+      onSuccess: () => {
+        setStartedCountDown(true);
+      },
+    }
+  );
 
   /**
    * 验证码倒计时的逻辑
@@ -60,6 +83,7 @@ export function useSendCode(form: FormInstance, type: string) {
     if (!phone || !captcha) return;
 
     // 验证码接口请求
+    execSendCode({ phone, captcha, type });
   }
 
   /**
@@ -73,9 +97,9 @@ export function useSendCode(form: FormInstance, type: string) {
         rules={[{ required: true, message: "请输入图形验证码!" }]}
       >
         <div className="flex items-center">
-          <Input className="w-[122px]" />
+          <Input className="w-[122px]" disabled={loadingWithGetCaptcha} />
           <img
-            onClick={() => {}}
+            onClick={refreshCaptcha}
             src={`data:image/svg+xml;base64,${btoa(captchaSrc)}`}
             className="w-[102px] h-[32px] inline-block rounded-md"
           />
@@ -90,7 +114,11 @@ export function useSendCode(form: FormInstance, type: string) {
         <div className="flex items-center">
           <Input className="w-[111px] mr-2" />
           <Button onClick={getCode} disabled={isDisable} className="w-[105px]">
-            {isDisable ? `${countDown}秒后重发` : "获取验证码"}
+            {loadingWithSendCode
+              ? "加载中"
+              : isDisable
+                ? `${countDown}秒后重发`
+                : "获取验证码"}
           </Button>
         </div>
       </Form.Item>
@@ -99,5 +127,6 @@ export function useSendCode(form: FormInstance, type: string) {
 
   return {
     sendCodeTemplate,
+    refreshCaptcha,
   };
 }

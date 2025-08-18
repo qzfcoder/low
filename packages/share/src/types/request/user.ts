@@ -14,3 +14,9 @@ export type RegisterRequest = Pick<IUser, "phone" | "password"> & {
 export type SendCodeRequest = Pick<IUser, "phone"> & {
   captcha: string;
 } & CaptchaRequest;
+
+// 账号密码登录接口参数类型
+export type LoginWithPasswordRequest = Pick<IUser, "phone" | "password">;
+
+// 账号密码登录接口参数类型
+export type LoginWithPhoneRequest = Pick<IUser, "phone"> & { sendCode: string };

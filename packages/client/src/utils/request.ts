@@ -3,7 +3,7 @@ import type { AxiosRequestConfig } from "axios";
 import { message } from "antd";
 import { storeAuth } from "../hooks/useStoreAuth";
 
-export const BASE_URL = "http://121.199.58.44:3000/api";
+export const BASE_URL = "http://127.0.0.1:3000/api";
 
 const request = axios.create({
   baseURL: BASE_URL,
@@ -14,7 +14,9 @@ const request = axios.create({
 request.interceptors.request.use(
   (config) => {
     if (storeAuth.token) {
-      config.headers.Authorization = `${storeAuth.token}`;
+      config.headers.Authorization = `Bearer ${storeAuth.token}`  
+      
+      // ` ${storeAuth.token}`;
     }
     return config;
   },
@@ -30,11 +32,10 @@ request.interceptors.response.use(
     if (data.code == 200) {
       message.success(data.message);
     }
-    return data;
+    return response.data;
   },
   (error) => {
-    message.error(error.response.data.message);
-    return Promise.reject(error);
+    return Promise.reject({ data: error.response?.data });
   }
 );
 export default async function makeRequest(
