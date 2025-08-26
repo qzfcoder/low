@@ -17,6 +17,8 @@ import {
 import { Divider } from "antd";
 import QrcodeSVG from "../../../assets/ewm.svg";
 import type { FC, ReactNode } from "react";
+import { useStoreComponents } from "~/hooks";
+import type { TComponentTypes } from "@lowcode/share";
 
 // 不同组件配置数组
 export const components = [
@@ -116,8 +118,9 @@ const EditorComponent: FC<ComponentProps> = ({
   children,
 }) => {
   const store = useStoreComponents();
+  console.log(store, 111111111);
   function handleClick() {
-    store.push(type);
+    store.push(type as TComponentTypes);
   }
   return (
     <div

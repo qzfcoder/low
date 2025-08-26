@@ -54,12 +54,21 @@ importers:
       axios:
         specifier: ^1.11.0
         version: 1.11.0
+      classnames:
+        specifier: ^2.5.1
+        version: 2.5.1
       mobx:
         specifier: ^6.13.7
         version: 6.13.7
+      mobx-react-lite:
+        specifier: ^4.1.0
+        version: 4.1.0(mobx@6.13.7)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react-router-dom:
         specifier: ^7.8.0
         version: 7.8.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      ulid:
+        specifier: ^3.0.1
+        version: 3.0.1
     devDependencies:
       '@eslint/js':
         specifier: ^9.30.1
@@ -3857,6 +3866,19 @@ packages:
   mlly@1.7.4:
     resolution: {integrity: sha512-qmdSIPC4bDJXgZTCR7XosJiNKySV7O215tsPtDN9iEO/7q/76b/ijtgRu/+epFXSJhijtTCCGp3DWS549P3xKw==}
 
+  mobx-react-lite@4.1.0:
+    resolution: {integrity: sha512-QEP10dpHHBeQNv1pks3WnHRCem2Zp636lq54M2nKO2Sarr13pL4u6diQXf65yzXUn0mkk18SyIDCm9UOJYTi1w==}
+    peerDependencies:
+      mobx: ^6.9.0
+      react: ^16.8.0 || ^17 || ^18 || ^19
+      react-dom: '*'
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+
   mobx@6.13.7:
     resolution: {integrity: sha512-aChaVU/DO5aRPmk1GX8L+whocagUUpBQqoPtJk+cm7UOXUk87J4PeWCh6nNmTTIfEhiR9DI/+FnA8dln/hTK7g==}
 
@@ -5295,6 +5317,10 @@ packages:
     resolution: {integrity: sha512-ZPtzy0hu4cZjv3z5NW9gfKnNLjoz4y6uv4HlelAjDK7sY/xOkKZv9xK/WQpcsBB3jEybChz9DPC2U/+cusjJVQ==}
     engines: {node: '>=18'}
 
+  ulid@3.0.1:
+    resolution: {integrity: sha512-dPJyqPzx8preQhqq24bBG1YNkvigm87K8kVEHCD+ruZg24t6IFEFv00xMWfxcC4djmFtiTLdFuADn4+DOz6R7Q==}
+    hasBin: true
+
   unbuild@3.6.0:
     resolution: {integrity: sha512-vWwKMo2bZS9jbMWO7n51nQvKCRUM3WmONA6+k4z0Ttfkkhh6q1DV/JhKkd58d61eeN9UoTGechlAxXvm11sghw==}
     hasBin: true
@@ -5333,6 +5359,11 @@ packages:
 
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
+
+  use-sync-external-store@1.5.0:
+    resolution: {integrity: sha512-Rb46I4cGGVBmjamjphe8L/UnvJD+uPPtTkNvX5mZgqdbavhI4EbgIWJiIHXJ8bc/i9EQGPRh4DwEURJ552Do0A==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
@@ -9517,6 +9548,14 @@ snapshots:
       pkg-types: 1.3.1
       ufo: 1.6.1
 
+  mobx-react-lite@4.1.0(mobx@6.13.7)(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
+    dependencies:
+      mobx: 6.13.7
+      react: 19.1.1
+      use-sync-external-store: 1.5.0(react@19.1.1)
+    optionalDependencies:
+      react-dom: 19.1.1(react@19.1.1)
+
   mobx@6.13.7: {}
 
   mri@1.2.0: {}
@@ -11000,6 +11039,8 @@ snapshots:
 
   uint8array-extras@1.4.0: {}
 
+  ulid@3.0.1: {}
+
   unbuild@3.6.0(typescript@5.9.2):
     dependencies:
       '@rollup/plugin-alias': 5.1.1(rollup@4.46.2)
@@ -11064,6 +11105,10 @@ snapshots:
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
+
+  use-sync-external-store@1.5.0(react@19.1.1):
+    dependencies:
+      react: 19.1.1
 
   util-deprecate@1.0.2: {}
 

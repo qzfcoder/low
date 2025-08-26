@@ -1,8 +1,11 @@
 import EditorHeader from "./Editor/EditorHeader";
 import EditorLeftPanel from "./Editor/EditorLeftPanel";
 import EditorRightPanel from "./Editor/EditorRightPanel";
+import EditorCanvas from "./Editor/EditorCanvas";
+import { useStoreComponents } from "~/hooks";
 
 function Editor() {
+  const {store: storeComps} = useStoreComponents();
   return (
     <div className="flex flex-col h-full bg-[#f1f2f4]">
       {/* 头部组件 */}
@@ -17,7 +20,7 @@ function Editor() {
         {/* 中间编辑组件 */}
         <div className="flex-auto flex items-center justify-center">
           <div className="editor-canvas-container w-[380px] h-[700px] bg-white text-left overflow-y-auto overflow-x-hidden">
-            中间编辑组件
+            <EditorCanvas  store={storeComps}></EditorCanvas>
           </div>
         </div>
         {/* 右侧编辑组件 */}
